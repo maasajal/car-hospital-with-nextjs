@@ -9,7 +9,7 @@ const Banner = () => {
           <div
             key={index}
             id={`slide${index + 1}`}
-            className="carousel-item w-full rounded-xl bg-cover"
+            className="carousel-item w-full rounded-xl bg-cover relative"
             style={{
               backgroundImage: `linear-gradient(45deg, rgba(7,25,82,0.7), rgba(0,0,0,0.3)), url(/assets/images/banner/${
                 index + 1
@@ -17,7 +17,7 @@ const Banner = () => {
             }}
           >
             <div className="h-full w-full left-0 flex items-center text-white rounded-xl py-10">
-              <div className="space-y-5 pl-20">
+              <div className="space-y-5 pl-10 md:pl-20">
                 <h1 className="text-3xl md:text-6xl font-semibold max-w-md leading-tight">
                   {banner.title}
                 </h1>
