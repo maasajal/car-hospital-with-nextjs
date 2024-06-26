@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { FaSearch } from "react-icons/fa";
 import { BsHandbag } from "react-icons/bs";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const navLinks = [
@@ -26,6 +28,7 @@ const Navbar = () => {
       path: "/contact",
     },
   ];
+  const session = useSession();
   return (
     <div className="bg-base-100">
       <div className="navbar py-6 container mx-auto">
@@ -82,6 +85,15 @@ const Navbar = () => {
           <Link href={"/"} className="btn btn-outline text-red-400 px-5">
             Appointment
           </Link>
+          {!session.data ? (
+            <Link href={"/login"} className="btn btn-outline text-red-400">
+              login
+            </Link>
+          ) : (
+            <button onClick={signOut} className="btn btn-outline text-red-400">
+              Sign Out
+            </button>
+          )}
         </div>
       </div>
     </div>
