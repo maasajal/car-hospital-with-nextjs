@@ -85,12 +85,19 @@ const Navbar = () => {
           <Link href={"/"} className="btn btn-outline text-red-400 px-5">
             Appointment
           </Link>
-          {!session.data ? (
+          {session?.status === "loading" && (
+            <span className="loading loading-dots loading-md"></span>
+          )}
+          {session?.status === "unauthenticated" && (
             <Link href={"/login"} className="btn btn-outline text-red-400">
               login
             </Link>
-          ) : (
-            <button onClick={signOut} className="btn btn-outline text-red-400">
+          )}
+          {session?.status === "authenticated" && (
+            <button
+              onClick={() => signOut()}
+              className="btn btn-outline text-red-400"
+            >
               Sign Out
             </button>
           )}
