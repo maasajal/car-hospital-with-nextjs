@@ -2,15 +2,7 @@
 
 import Link from "next/link";
 import ServiceCard from "../cards/ServiceCard";
-import useAxiosPublic from "@/hooks/useAxiosPublic";
-
-const axiosPublic = useAxiosPublic();
-
-const getServices = async () => {
-  const res = await axiosPublic.get("/services/api/all-service");
-  const services = res.data;
-  return services;
-};
+import { getServices } from "@/services/getServices";
 
 const Services = async () => {
   const { services } = await getServices();

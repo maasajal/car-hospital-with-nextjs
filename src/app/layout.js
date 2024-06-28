@@ -7,7 +7,10 @@ import AuthProvider from "@/services/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Car Hospital",
+  title: {
+    default: "Car Hospital",
+    template: "%s - Car Hospital",
+  },
   description: "Car Repairing shop - vehicle repair garage",
 };
 
