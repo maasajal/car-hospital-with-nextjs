@@ -1,23 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 import ServiceCard from "../cards/ServiceCard";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
-const Services = () => {
-  const [services, setServices] = useState([]);
-  useEffect(() => {
-    const FetchServices = async () => {
-      try {
-        const response = await axios.get("/services.json");
-        setServices(response.data);
-      } catch (error) {
-        console.log(`Error ${error}`);
-      }
-    };
-    FetchServices();
-  }, []);
+const axiosPublic = useAxiosPublic();
+
+const getServices = async () => {
+  const res = await axiosPublic.get("/services/api/all-service");
+  const services = res.data;
+  return services;
+};
+
+const Services = async () => {
+  const { services } = await getServices();
   return (
     <div id="services">
       <div className="text-center max-w-2xl mx-auto space-y-5">
@@ -29,9 +25,10 @@ const Services = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
-        {services.map((service) => (
-          <ServiceCard key={service._id} service={service}></ServiceCard>
-        ))}
+        {services?.length > 0 &&
+          services?.map((service) => (
+            <ServiceCard key={service._id} service={service}></ServiceCard>
+          ))}
       </div>
       <div className="text-center">
         <Link href="/more-services" className="btn btn-outline text-[#FF3811]">
